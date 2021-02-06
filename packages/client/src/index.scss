@@ -1,0 +1,141 @@
+@import-normalize;
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+:root {
+  --background_color: #121212;
+  --primary_color: #BF5FFF;
+  --primary_variant: #690055;
+  --secondary_color: #747171;
+  --secondary_variant: #8a8a8a;
+  --text_color: #ffffff;
+
+  --link_color: #8a8a8a;
+  --link_color_hover: #8a8a8a;
+
+  --game_font: "Press Start 2P";
+  --decorative_font: Arial;
+  --text_font: 'Open Sans', sans-serif;
+
+}
+
+.single-shadow {
+  color: white;
+  margin-top: 0px;
+  text-shadow:
+    -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.splash-button {
+  background: none;
+  background-color: #ffffff88;
+  padding: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--decorative_font);
+  font-size: 1.5rem;
+  color: rgb(0, 0, 0);
+  min-width: 75%;
+  white-space: nowrap;
+
+  &:disabled {
+    filter: brightness(50%) !important;
+    cursor: default !important ;
+  }
+  &:hover, &:focus {
+    filter: brightness(50%);
+    outline: "solid while 3px";
+    outline-offset: 1px;
+  }
+}
+
+.title {
+  font-size: 4rem;
+}
+
+.fun-text {
+  color: rgb(0, 0, 0);
+  margin-top: 0px;
+}
+
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
+body {
+  font-family: var(--text_font);
+  height: 100%;
+  overflow: auto;
+}
+
+#root {
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+}
+
+.router-root {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow-y: scroll;
+}
+
+.scroll-disabled {
+  .router-root {
+    overflow-y: hidden;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+a {
+  color: var(--link_color);
+  &:hover {
+    color: var(--link_color_hover);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: var(--decorative_font);
+  font-weight: 900;
+  color: var(--primary_color);
+  font-size: 3rem;
+}
+
+html {
+  min-width: 100%;
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+}
+body {
+  display: block;
+  min-width: 100%;
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: var(--background_color);
+  user-select: none;
+  color: var(--text_color);
+}
+
+.root {
+  width: 100%;
+  height: 100%;
+}
+
+.interactable {
+  pointer-events: auto;
+  user-select: auto;
+}

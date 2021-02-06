@@ -1,0 +1,13 @@
+.grid-container {
+  width: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  display: inline-grid;
+  margin: auto;
+  padding: auto;
+  grid-template-columns: repeat(auto-fit, minmax(260px, max-content));
+  grid-gap: auto;
+  justify-content: center;
+  align-content: center;
+}

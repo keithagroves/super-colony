@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "allowJs": true,
+      "baseUrl": "./src",
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "jsx": "react",
+      "paths": {
+        "game/*": ["game/*"],
+        "components/*": ["components/*"],
+        "customization/*": ["customization/*"],
+        "hooks/*": ["hooks/*"],
+        "util/*": ["util/*"],
+        "services/*": ["services/*"],
+        "particles/*": ["particles/*"],
+        "sprites/*": ["sprites/*"],
+      }
+    },
+    "include": [
+      "src"
+  , "tests/MeManager.spec.ts"  ]
+  }
+  

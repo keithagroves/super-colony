@@ -1,0 +1,30 @@
+{
+    "name": "@adventurers/server",
+    "version": "1.0.0",
+    "description": "",
+    "private": true,
+    "main": "index.js",
+    "scripts": {
+      "start": "NODE_ENV='development' nodemon --watch './src/**/*.ts' --watch '../common/src/**/*' --exec ts-node ./src/index.ts",
+      "build": "tsc -p tsconfig.json",
+      "serve": "NODE_ENV='production' node build/index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "nodemon": "^2.0.4",
+      "ts-node": "^9.0.0",
+      "typescript": "^4.0.3"
+    },
+    "workspaces": [
+      "../common"
+    ],
+    "dependencies": {
+      "@colyseus/schema": "^1.0.3",
+      "async-lock": "^1.2.4",
+      "colyseus": "^0.14.3",
+      "express": "^4.17.1",
+      "http": "^0.0.1-security"
+    }
+  }
+  

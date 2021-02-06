@@ -1,0 +1,25 @@
+.set-spell-button-modal {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-keybinding-button {
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.reserved-keys {
+  font-size: 12px;
+}
+
+.set-spell-hotkey-button {
+  font-size: 12px;
+  margin-bottom: 0.5rem;
+}

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { fromEvent } from "rxjs";
 import { throttleTime } from "rxjs/operators";
-import {setStaffAngle, keyType, controlsDown, ControlProps, controlsUp} from './index';
+import {keyType, controlsDown, ControlProps, controlsUp} from './index';
 
 interface DesktopControlProps extends ControlProps {
   updateAndSend: (change: { [K in keyType]?: boolean | string }) => void;

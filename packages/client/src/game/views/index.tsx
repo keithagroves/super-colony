@@ -49,7 +49,8 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     this.app = new PIXI.Application({
       resizeTo: window,
       antialias: false,
-      autoDensity: true
+      autoDensity: true,
+      backgroundColor: 0x787372
     });
     this.gameCanvas!.appendChild(this.app.view);
     this.viewport = new Viewport();

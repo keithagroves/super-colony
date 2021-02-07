@@ -11,7 +11,7 @@ export interface IProps {
 export const Abdomen = (props: IProps) => {
     return (
     <>
-    <Ellipse x={props.x} y={props.y} width={props.width} height={props.height}/>
+    <Ellipse x={props.x} y={props.y} width={props.width} height={props.height} fill={0x000031} fillAlpha={1} outline={0}/>
     </>
     )
   throw new Error('Unimplemented render of ant');

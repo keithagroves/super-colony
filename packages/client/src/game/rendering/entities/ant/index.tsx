@@ -13,7 +13,7 @@ export interface IProps {
   y: number;
   scale: number;
 }
-let direction = "right";
+let direction = "left";
 export const Ant = (props: IProps) => {
   const scale = useMemo(() => {
     if (direction === "right") {
@@ -22,18 +22,19 @@ export const Ant = (props: IProps) => {
       return new Point(1, 1);
     }
   }, [direction]);
-    let color = 0x787372;
-    let headOffset = {x:-6, y:-3};
-    let thoraxOffset = {x:0, y:-1};
-    let abdomenOffset = {x:7, y:-2};
-    return (
+
+  let color = 0x787372;
+  let headOffset = { x: -6, y: -3 };
+  let thoraxOffset = { x: 1, y: -1 };
+  let abdomenOffset = { x: 9, y: -2 };
+  return (
     <>
-    <Container x={props.x} y ={props.y} scale={scale}>
-    <Head x={headOffset.x} y = {headOffset.y} width={6} height={5}/>
-    <Thorax x={thoraxOffset.x} y = {thoraxOffset.y} width={7} height={7}/> 
-    <Abdomen x={abdomenOffset.x} y = {abdomenOffset.y} width={10} height={8}/> 
-    </Container>
+      <Container x={props.x} y={props.y} scale={scale}>
+        <Head x={headOffset.x} y={headOffset.y} width={6} height={5} />
+        <Thorax x={thoraxOffset.x} y={thoraxOffset.y} width={9} height={7} />
+        <Abdomen x={abdomenOffset.x} y={abdomenOffset.y} width={10} height={8} />
+      </Container>
     </>
-    )
+  )
   throw new Error('Unimplemented render of ant');
 };

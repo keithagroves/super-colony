@@ -11,6 +11,7 @@ interface RectangleProps {
   outlineWidth?: number;
   fill?: number;
   zIndex?: number;
+  rotation?:number;
 }
 
 function propsEqual(oldProps: RectangleProps, newProps: RectangleProps) {
@@ -34,6 +35,9 @@ export const Ellipse = CustomPIXIComponent<PIXI.Graphics, RectangleProps>(
         }
         if (!propsEqual(oldProps, newProps)) {
           instance.clear()
+          if(newProps.rotation){
+            instance.rotation=newProps.rotation;
+          }
           if (newProps.fill) {
             instance.beginFill(newProps.fill, newProps.fillAlpha || 1);
             instance.drawEllipse(newProps.x, newProps.y, newProps.width/2, newProps.height/2);
@@ -43,6 +47,7 @@ export const Ellipse = CustomPIXIComponent<PIXI.Graphics, RectangleProps>(
             instance.lineStyle(newProps.outlineWidth || 1, newProps.outline);
             instance.drawEllipse(newProps.x, newProps.y, newProps.width/2, newProps.height/2);
           }
+          
         }
       }
     },

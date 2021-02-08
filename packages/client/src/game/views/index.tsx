@@ -6,6 +6,7 @@ import { Viewport } from "pixi-viewport";
 import { render } from "react-pixi-fiber";
 import {GameInstance} from "../rendering/instance"
 import { Controls } from "game/controls";
+import { Types } from "@adventurers/common";
 
 interface PlayViewProps {
   stateManager: StateManager;
@@ -106,8 +107,9 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
       me = {me}
       />, this.viewport);
   }
-  actionCallback(){
-    console.log("actioncallback")
+  actionCallback(inputs: Types.IInputs){
+    console.log("actioncallback");
+    this.props.stateManager.room?.send("input", inputs);
   }
   mouseMoveCallback(){
     console.log("mouseMoveCallback")
@@ -130,7 +132,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
             component.gameCanvas = thisDiv!;
           }}
         />
-        <Controls domElement={window} actionCallback={this.actionCallback} mouseMoveCallback={this.mouseMoveCallback} shootCallback={this.mouseClickCallback}/>
+        <Controls domElement={window} actionCallback={(v: Types.IInputs) => this.actionCallback(v)} mouseMoveCallback={this.mouseMoveCallback} shootCallback={this.mouseClickCallback}/>
       </>
     );
   }

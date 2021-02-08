@@ -1,4 +1,4 @@
-import React, { Component, ReactNode, useState, useEffect } from "react";
+import React, { Component, ReactNode} from "react";
 import { RouteComponentProps, Link } from "@reach/router";
 import {
   Box,

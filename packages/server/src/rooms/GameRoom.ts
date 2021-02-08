@@ -38,7 +38,7 @@ export class GameRoom extends Room {
         const ts = Date.now();
         this.game.tick(ts);
         this.broadcastPlayer(this.player);
-        this.player.x++;
+        this.player.x--;
     }
     broadcastTimestamp() {
         this.broadcast("timestamp", Date.now());

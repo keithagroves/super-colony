@@ -1,6 +1,5 @@
 import React from "react";
 import { Bar } from "./Bar";
-import { HEALTH_BAR_HEIGHT } from "../constants";
 
 interface ShieldBarProps {
   x: number;
@@ -40,7 +39,7 @@ export const ShieldBar = (props: ShieldBarProps) => {
         height={props.height}
       />
     );
-    ydx += HEALTH_BAR_HEIGHT + 1;
+    ydx += 10 + 1;
     shield -= 100;
   }
 

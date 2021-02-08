@@ -12,7 +12,7 @@ export const Abdomen = (props: IProps) => {
 
     return (
     <>
-    <Container x ={props.x} y = {props.y} rotation={Math.PI*.75}>
+    <Container x ={props.x} y = {props.y} rotation={2*Math.PI*.07}>
       <Ellipse x={0} y={0} width={props.width} height={props.height} fill={0x000031} fillAlpha={1} outline={0}/>
     </Container>
     </>

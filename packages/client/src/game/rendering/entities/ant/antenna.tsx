@@ -43,22 +43,22 @@ export class Antenna extends React.Component{
       render() {
         this.angle+=this.feelersMove;
         this.angle%=(2*Math.PI);
-        if(Math.abs(this.angle - this.target) < 0.05){
+        if(Math.abs(this.angle - this.target) < 0.01){
           this.target = Math.random()*Math.PI+Math.PI/2;
           if(this.target > this.angle){
-            this.feelersMove = 0.04;
+            this.feelersMove = 0.001;
           } else {
-            this.feelersMove = -0.04;
+            this.feelersMove = -0.001;
           }
         }
         this.jointAngle+=this.jointMove;
         this.jointAngle%=(2*Math.PI);
-        if(Math.abs(this.jointAngle - this.jointTarget) < 0.05){
-          this.jointTarget = Math.random()*Math.PI+Math.PI/2+Math.PI/4;
+        if(Math.abs(this.jointAngle - this.jointTarget) < 0.01){
+          this.jointTarget = Math.random()*Math.PI/2+Math.PI;
           if(this.jointTarget > this.jointAngle){
-            this.jointMove = 0.04;
+            this.jointMove = Math.random()*0.01;
           } else {
-            this.jointMove = -0.04;
+            this.jointMove = -Math.random()*0.01;
           }
         }
         this.antennaJointX = Math.cos(this.jointAngle) * antennaRadius;

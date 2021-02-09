@@ -28,6 +28,7 @@
         "services/*": ["services/*"],
         "particles/*": ["particles/*"],
         "sprites/*": ["sprites/*"],
+        "@adventurers/common": ["../common/src/*"]
       }
     },
     "include": [

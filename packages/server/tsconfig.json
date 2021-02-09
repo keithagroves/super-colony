@@ -16,7 +16,8 @@
       "sourceMap": false,
       "paths": {
         "game/*": ["game/*"],
-        "room/*": ["room/*"]
+        "room/*": ["room/*"],
+        "@adventurers/common": ["../common/src/*"]
       }
     },
     "include": [

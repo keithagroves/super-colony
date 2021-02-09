@@ -21,7 +21,6 @@ export class StateManager{
         this.roomId = this.room.id;
         this.sessionId = this.room.sessionId;
         const handlers: Record<number | "timestamp"|"player", (v: any) => void> = {
-          // winner: (v) => this.handleWinner(v),
           
           timestamp: (v) => {
             this.serverLatencyOffset = v - Date.now();

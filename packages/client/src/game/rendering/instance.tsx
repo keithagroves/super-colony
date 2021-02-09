@@ -24,8 +24,6 @@ export const GameInstance = (props: IProps) => {
     <>
       <Container sortableChildren={true}>
       <Ant playerId={"abc"} key={""} x={me.x} y={me.y} scale={1}/>
-      <DebugCircle x={me.x} y={me.y} radius={50}></DebugCircle>
-      <DebugCircle x={100} y={100} radius={50}></DebugCircle>
       <Rectangle x={100} y={100} width={50} height={100} fill={255} fillAlpha={1} outline={10}></Rectangle>
       </Container>
     </>

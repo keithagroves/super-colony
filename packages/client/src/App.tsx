@@ -1,7 +1,6 @@
 import React, { Component, lazy, Suspense } from "react";
 import { Router, globalHistory } from "@reach/router";
 import { ColyseusService } from "services/colyseus";
-import {analytics} from 'services/analytics';
 import {settings, SCALE_MODES} from 'pixi.js';
 import {Loading} from './scenes/Loading';
 
@@ -38,9 +37,7 @@ class App extends Component {
 
   historyUnsubscribe?: ReturnType<typeof globalHistory.listen>;
   componentDidMount() {
-    analytics.pageView(window.location.pathname);
     this.historyUnsubscribe = globalHistory.listen(v => {
-      analytics.pageView(v.location.pathname);
     })
   }
 

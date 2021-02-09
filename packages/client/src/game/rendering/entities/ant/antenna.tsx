@@ -9,7 +9,7 @@ export interface IProps {
   radius: number;
   angle: number;
 }
-const antennaRadius = 8;
+const antennaRadius = 7;
 export class Antenna extends React.Component{
   feelersMove=0.01;
   jointMove=0.01;
@@ -28,7 +28,7 @@ export class Antenna extends React.Component{
         this.antennaEndX = Math.cos(props.angle) * antennaRadius;
         this.antennaEndY = Math.sin(props.angle) * antennaRadius;
         this.angle = Math.random()*Math.PI+Math.PI/2;
-        this.jointAngle =Math.random()*Math.PI+Math.PI/2; 
+        this.jointAngle =Math.PI;
         
       }
       componentDidMount() {
@@ -43,22 +43,22 @@ export class Antenna extends React.Component{
       render() {
         this.angle+=this.feelersMove;
         this.angle%=(2*Math.PI);
-        if(Math.abs(this.angle - this.target) < 0.01){
+        if(Math.abs(this.angle - this.target) < 0.05){
           this.target = Math.random()*Math.PI+Math.PI/2;
           if(this.target > this.angle){
-            this.feelersMove = 0.001;
+            this.feelersMove = Math.random()*0.04;
           } else {
-            this.feelersMove = -0.001;
+            this.feelersMove = -Math.random()*0.04;
           }
         }
         this.jointAngle+=this.jointMove;
         this.jointAngle%=(2*Math.PI);
-        if(Math.abs(this.jointAngle - this.jointTarget) < 0.01){
+        if(Math.abs(this.jointAngle - this.jointTarget) < 0.05){
           this.jointTarget = Math.random()*Math.PI/2+Math.PI;
           if(this.jointTarget > this.jointAngle){
-            this.jointMove = Math.random()*0.01;
+            this.jointMove = Math.random()*0.04;
           } else {
-            this.jointMove = -Math.random()*0.01;
+            this.jointMove = -Math.random()*0.04;
           }
         }
         this.antennaJointX = Math.cos(this.jointAngle) * antennaRadius;

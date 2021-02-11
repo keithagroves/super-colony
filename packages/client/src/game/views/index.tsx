@@ -7,6 +7,7 @@ import { render } from "react-pixi-fiber";
 import {GameInstance} from "../rendering/instance"
 import { Controls } from "game/controls";
 import { Types } from "@adventurers/common";
+import {Simple} from "pixi-cull";
 
 interface PlayViewProps {
   stateManager: StateManager;
@@ -34,6 +35,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
   app!: PIXI.Application;
   gameCanvas!: HTMLDivElement;
   viewport!: Viewport;
+  cull!: Simple;
   state: PlayViewState = {
     fps: 60,
     ping: 50,
@@ -55,8 +57,10 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     });
     this.gameCanvas!.appendChild(this.app.view);
     this.viewport = new Viewport();
+    this.cull = new Simple();
     this.viewport.scale = new PIXI.Point(scale, scale);
     this.app.stage.addChild(this.viewport);
+    this.cull.addList(this.viewport.children);
     this.app.start();
     this.raf = requestAnimationFrame(this.tick);
   }
@@ -81,8 +85,8 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
       // not ready to render yet
       return;
     }
-
-
+    //this.cull.addList(this.viewport.children);
+    //this.cull.cull(this.viewport)
     this.viewport.scale = new PIXI.Point(scale, scale);
 
     const width = this.app.view.width;
@@ -101,11 +105,20 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
      
     })
 
-    render(<GameInstance
+    render(
+    <GameInstance
       key="game-instance"
       viewport={this.viewport}
       me = {me}
-      />, this.viewport);
+      cull= {this.cull}
+      />  
+      , this.culledViewport());
+   
+  }
+  culledViewport() :Viewport{
+    this.cull.addList(this.viewport.children);
+    this.cull.cull(this.viewport.getVisibleBounds());
+    return this.viewport;
   }
   actionCallback(inputs: Types.IInputs){
     console.log("actioncallback");

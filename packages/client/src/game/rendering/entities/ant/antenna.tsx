@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import { Line } from '../../components/Line';
 import { Container } from 'react-pixi-fiber';
 import { stat } from 'fs';
+import {Ellipse} from '../../components/Ellipse';
 
 export interface IProps {
   x: number;
@@ -57,6 +58,7 @@ export class Antenna extends React.Component {
         <Container x={this.props.x} y={this.props.y}>
           <Line startX={0} endX={this.antennaJointX} startY={0} endY={this.antennaJointY} width={1} color={0x001100} />
           <Line startX={this.antennaJointX} endX={this.antennaJointX + this.antennaEndX} startY={this.antennaJointY} endY={this.antennaJointY + this.antennaEndY} width={1} color={0x001100} />
+          <Ellipse x={this.antennaJointX + this.antennaEndX} y = {this.antennaJointY + this.antennaEndY} width={2} height={2} fill={0x000022} fillAlpha={1} outline={0}  />
         </Container>
       </>
     )

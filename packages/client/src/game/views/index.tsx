@@ -115,6 +115,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
       , this.culledViewport());
    
   }
+  
   culledViewport() :Viewport{
     this.cull.addList(this.viewport.children);
     this.cull.cull(this.viewport.getVisibleBounds());

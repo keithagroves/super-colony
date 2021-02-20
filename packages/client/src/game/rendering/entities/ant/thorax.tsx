@@ -7,11 +7,14 @@ export interface IProps {
   y: number;
   width: number;
   height: number;
+  dist: number;
 }
 let frameCount = 0;
 const legRadius = 4;
+
 export const Thorax = (props: IProps) => {
-    frameCount+=0.04;
+    
+    frameCount+=props.dist/2500;
     let legY = props.y+2;
     let legset2 = frameCount+ Math.PI*0.7;
     let legset3 = frameCount+ Math.PI*1.5;

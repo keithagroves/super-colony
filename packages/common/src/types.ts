@@ -1,6 +1,7 @@
 export interface Player{
     x:number,
-    y:number
+    y:number,
+    distance: number
 }
 
 export interface IInputs {

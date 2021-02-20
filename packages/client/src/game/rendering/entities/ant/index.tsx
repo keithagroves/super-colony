@@ -11,10 +11,12 @@ export interface IProps {
   playerId: string;
   x: number;
   y: number;
+  dist: number;
   scale: number;
 }
 let direction = "left";
 export const Ant = (props: IProps) => {
+  
   const scale = useMemo(() => {
     if (direction === "right") {
       return new Point(-1, 1);
@@ -31,7 +33,7 @@ export const Ant = (props: IProps) => {
     <>
       <Container x={props.x} y={props.y} scale={scale}>
         <Head x={headOffset.x} y={headOffset.y} width={6} height={5} />
-        <Thorax x={thoraxOffset.x} y={thoraxOffset.y} width={9} height={7} />
+        <Thorax x={thoraxOffset.x} y={thoraxOffset.y} dist={5} width={9} height={7} />
         <Abdomen x={abdomenOffset.x} y={abdomenOffset.y} width={10} height={8} />
       </Container>
     </>

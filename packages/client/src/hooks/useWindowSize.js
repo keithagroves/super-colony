@@ -12,13 +12,14 @@ export function useWindowSize() {
   useEffect(() => {
     // Handler to call on window resize
     function handleResize() {
+      console.log("this works");
+
       // Set window width/height to state
       setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight,
       });
     }
-
     // Add event listener
     window.addEventListener("resize", handleResize);
 

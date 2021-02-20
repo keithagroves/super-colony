@@ -16,6 +16,7 @@ let targetLeft = Math.PI;
 let targetRight = Math.PI;
 
 export const Head = (props: IProps) => {
+
     let leftAntenna = useRef(Math.random()*Math.PI+Math.PI/2);
     let rightAntenna = useRef(Math.random()*Math.PI+Math.PI/2);
 
@@ -24,7 +25,6 @@ export const Head = (props: IProps) => {
     }
     return (
     <>
-
     <Antenna x={props.x} y={props.y} radius={antennaRadius} angle={leftAntenna.current}></Antenna>
     <Antenna x={props.x} y={props.y} radius={antennaRadius} angle={rightAntenna.current}></Antenna>
     <Mandibles x={props.x} y={props.y} ></Mandibles>
@@ -32,8 +32,6 @@ export const Head = (props: IProps) => {
     <Ellipse x={0} y={0} width={props.width} height={props.height} fill={0x000031} fillAlpha={1} outline={10} rotation={Math.PI}/>
     <Ellipse x={0} y={-1} width={props.width/2} height={props.height/2} fill={0x313131} fillAlpha={1} outline={0} rotation={Math.PI}/>
     </Container>
-    
-    
     </>
     )
   throw new Error('Unimplemented render of ant');

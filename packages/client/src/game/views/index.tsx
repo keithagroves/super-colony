@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { StateManager } from "game/state";
-import { useDisableScroll } from "hooks";
+import { useDisableScroll, useWindowSize } from "hooks";
 import * as PIXI from "pixi.js";
 import { Viewport } from "pixi-viewport";
 import { render } from "react-pixi-fiber";
-import {GameInstance} from "../rendering/instance"
+import { GameInstance } from "../rendering/instance"
 import { Controls } from "game/controls";
 import { Types } from "@adventurers/common";
-import {Simple} from "pixi-cull";
+import { Simple } from "pixi-cull";
 
 interface PlayViewProps {
   stateManager: StateManager;
 }
 
-interface PlayViewState  {
+interface PlayViewState {
   fps: number;
   ping: number;
   menuShow: boolean;
@@ -25,6 +25,11 @@ const ScrollDisable = () => {
   useDisableScroll();
   return <></>;
 };
+
+const HandleResize = () => {
+  useWindowSize();
+  return <></>;
+}
 
 let scale = getScale();
 function getScale() {
@@ -41,7 +46,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     ping: 50,
     menuShow: false,
   };
-  playerPosition: {x: number, y: number} = {x: 0, y :0};
+  playerPosition: { x: number, y: number } = { x: 0, y: 0 };
 
   raf?: ReturnType<typeof requestAnimationFrame>;
 
@@ -68,7 +73,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
   tick = () => {
     this.props.stateManager.tick();
     this.renderGame();
-    this.raf= requestAnimationFrame(this.tick)
+    this.raf = requestAnimationFrame(this.tick)
   }
 
   componentWillUnmount() {
@@ -78,7 +83,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
       this.raf = undefined;
     }
   }
-  
+
   renderGame() {
     const stateManager = this.props.stateManager;
     if (!stateManager.firstState) {
@@ -100,36 +105,39 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     }
 
     this.setState({
-      
+
       fps: this.app.ticker.FPS,
-     
+
     })
 
     render(
-    <GameInstance
-      key="game-instance"
-      viewport={this.viewport}
-      me = {me}
-      cull= {this.cull}
-      />  
+      <GameInstance
+        key="game-instance"
+        viewport={this.viewport}
+        me={me}
+        cull={this.cull}
+      />
       , this.culledViewport());
-   
+
   }
-  
-  culledViewport() :Viewport{
-    this.cull.addList(this.viewport.children);
-    this.cull.cull(this.viewport.getVisibleBounds());
+
+  culledViewport(): Viewport {
+    if (this.viewport.dirty) {
+      this.cull.addList(this.viewport.children);
+      this.cull.cull(this.viewport.getVisibleBounds());
+      this.viewport.dirty = false;
+    }
     return this.viewport;
   }
-  actionCallback(inputs: Types.IInputs){
+  actionCallback(inputs: Types.IInputs) {
     console.log("actioncallback");
     this.props.stateManager.room?.send("input", inputs);
   }
-  mouseMoveCallback(){
+  mouseMoveCallback() {
     console.log("mouseMoveCallback")
 
   }
-  mouseClickCallback(){
+  mouseClickCallback() {
     console.log("mouseClickCallback")
 
   }
@@ -139,6 +147,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     let component = this;
     return (
       <>
+        <HandleResize />
         <ScrollDisable />
         <div
           className="game-display"
@@ -146,7 +155,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
             component.gameCanvas = thisDiv!;
           }}
         />
-        <Controls domElement={window} actionCallback={(v: Types.IInputs) => this.actionCallback(v)} mouseMoveCallback={this.mouseMoveCallback} shootCallback={this.mouseClickCallback}/>
+        <Controls domElement={window} actionCallback={(v: Types.IInputs) => this.actionCallback(v)} mouseMoveCallback={this.mouseMoveCallback} shootCallback={this.mouseClickCallback} />
       </>
     );
   }

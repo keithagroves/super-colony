@@ -8,7 +8,7 @@ export class StateManager{
     roomId!: string;
     sessionId!: string;
     firstState: boolean = false;
-    me:Types.Player = {x:100,y:100}
+    me:Types.Player = {x:100,y:100, distance:0}
     serverLatencyOffset: number = 50;
     async create(colyseus: ColyseusService, lobby: string): Promise<StateManager> {
         const result = new StateManager(colyseus, lobby);
@@ -24,7 +24,7 @@ export class StateManager{
           
           timestamp: (v) => {
             this.serverLatencyOffset = v - Date.now();
-            console.log(v);
+            //console.log(v);
           },
           player: (v) => (this.me = v),
         
@@ -32,6 +32,10 @@ export class StateManager{
       for (let msg in handlers) {
         const key = msg as any;
         this.room.onMessage(key, handlers[key]);
+        this.room.onStateChange((state)=>{
+          console.log("state"+state);
+         
+        })
       }
       }
 
@@ -39,6 +43,7 @@ export class StateManager{
 
       }
       tick(){
+       
           this.firstState = true;
             const t = Date.now();
       }

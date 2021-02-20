@@ -1,7 +1,8 @@
-import { Room } from 'colyseus';
+import { RegisteredHandler, Room } from 'colyseus';
 import {Game} from '../game/Game';
-import {isIdFree, takeId, freeId} from './roomIdStore';
+import {isIdFree, takeId} from './roomIdStore';
 import {Types} from '@adventurers/common';
+import {MessageHandler} from './MessageHandler';
 export interface RoomOptions {
     roomId: string;
     random: boolean;
@@ -10,9 +11,12 @@ export interface RoomOptions {
 
 export class GameRoom extends Room {
     game: Game;
-    player: Types.Player = {x:100, y:100};
+    messageHandler: MessageHandler;
+    player: Types.Player = {x:100, y:100, distance: 10};
     async onCreate (options: Partial<RoomOptions>){
     this.game = new Game();
+    this.setState(this.game.world);
+    this.game.world.init();
     const seekingId = options.roomId?.toLowerCase()
     if (seekingId && !isIdFree(seekingId)) {
         this.roomId = seekingId
@@ -20,7 +24,7 @@ export class GameRoom extends Room {
     takeId(this.roomId);
     this.registerMessages();
 
-    setInterval(() => this.broadcastTimestamp(), 1000);
+    setInterval(() => this.messageHandler.broadcastTimestamp(), 1000);
     this.startGameLoop();
     }
 
@@ -32,18 +36,12 @@ export class GameRoom extends Room {
       }
 
     registerMessages(){
-
+        this.messageHandler = new MessageHandler(this, this.game);
+        this.messageHandler.registerMessages();
     }
     tick(){
         const ts = Date.now();
         this.game.tick(ts);
-        this.broadcastPlayer(this.player);
-       // this.player.x--;
     }
-    broadcastTimestamp() {
-        this.broadcast("timestamp", Date.now());
-      }
-      broadcastPlayer(player :Types.Player) {
-        this.broadcast("player", player);
-      }
+
 }

@@ -22,7 +22,7 @@ export class PlayerViewManager{
     inputs(inputState: IInputs){
         Object.assign(this.inputState,inputState);
     }
-
+//TODO: add warcraft style mouse scrolling
     tick(t: number){
         let dx = (t-this.lastUpdate)/50;
         this.lastUpdate = t;

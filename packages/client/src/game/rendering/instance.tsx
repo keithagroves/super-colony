@@ -3,14 +3,15 @@ import React, { useMemo, useRef } from "react";
 import { Container } from "react-pixi-fiber";
 import { Viewport } from 'pixi-viewport';
 import { Types } from '@adventurers/common';
-import { Rectangle } from "./components";
+import { Rectangle } from "./components/Rectangle";
 import { Ant } from "./entities/ant";
 import { Simple } from "pixi-cull";
 import { PlayerViewManager } from "game/state/managers/PlayerViewManager";
-
+import {Block} from './entities/block'
 interface IProps {
   viewport: Viewport,
   me: PlayerViewManager,
+  blockRects: JSX.Element[],
   cull: Simple
 }
 interface Xy {
@@ -44,6 +45,7 @@ export const GameInstance = (props: IProps) => {
     <>
       <Container sortableChildren={true}>
         {players}
+        {props.blockRects}
         <Ant playerId={"abc"} key={"aasdf"} dist={19} x={me.x} y={me.y} scale={1} />
         <Rectangle x={100} y={100} width={50} height={100} fill={255} fillAlpha={1} outline={10}></Rectangle>
       </Container>

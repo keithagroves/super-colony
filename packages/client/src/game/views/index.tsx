@@ -8,6 +8,8 @@ import { GameInstance } from "../rendering/instance"
 import { Controls } from "game/controls";
 import { Types } from "@adventurers/common";
 import { Simple } from "pixi-cull";
+import { Rectangle } from "game/rendering/components/Rectangle";
+import { Block } from "game/rendering/entities/block";
 
 interface PlayViewProps {
   stateManager: StateManager;
@@ -93,7 +95,19 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     //this.cull.addList(this.viewport.children);
     //this.cull.cull(this.viewport)
     this.viewport.scale = new PIXI.Point(scale, scale);
-
+    let blocksRects: any = [];
+    
+    if(this.props.stateManager.room){
+    const blocks = this.props.stateManager.room.state.blocks;
+    if(blocks){
+      blocks.forEach((value: any, key: string)=>{
+        blocksRects.push(<Block key={key} x={value.x} y={value.y} width={100} height = {100}   />)
+  }
+      );
+  }
+  }
+  
+  console.log(blocksRects.length);
     const width = this.app.view.width;
     const height = this.app.view.height;
     const me = stateManager.playerView;
@@ -115,6 +129,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
         key="game-instance"
         viewport={this.viewport}
         me={me}
+        blockRects={blocksRects}
         cull={this.cull}
       />
       , this.culledViewport());

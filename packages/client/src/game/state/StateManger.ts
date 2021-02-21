@@ -32,10 +32,7 @@ export class StateManager{
       for (let msg in handlers) {
         const key = msg as any;
         this.room.onMessage(key, handlers[key]);
-        this.room.onStateChange((state)=>{
-          console.log("state"+state);
-         
-        })
+       
       }
       }
 

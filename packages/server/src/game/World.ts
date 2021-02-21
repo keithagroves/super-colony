@@ -7,14 +7,14 @@ export class World extends Schema{
 
 
     init(){
-         let id = nanoid(10);
-          for(let i = 0; i < 100; i++){
-               for(let j = 0; j < 100; j++){
+          for(let i = 0; i < 10; i++){
+               for(let j = 0; j < 10; j++){
                     let block = new Block();
-                    block.x = i * 10;
-                    block.y = j * 10;
+                    block.x = i * 100;
+                    block.y = j * 100;
                     block.blocktype = Math.floor(Math.random()*5);
                     block.id = nanoid(10);
+                    this.blocks.set(block.id, block);
                }     
           }
     }

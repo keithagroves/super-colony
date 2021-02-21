@@ -3,20 +3,21 @@ import {Game} from '../game/Game';
 import {isIdFree, takeId} from './roomIdStore';
 import {Types} from '@adventurers/common';
 import {MessageHandler} from './MessageHandler';
+import { World } from 'game/World';
 export interface RoomOptions {
     roomId: string;
     random: boolean;
     maxClients: number;
   }
 
-export class GameRoom extends Room {
+export class GameRoom extends Room<World> {
     game: Game;
     messageHandler: MessageHandler;
     player: Types.Player = {x:100, y:100, distance: 10};
     async onCreate (options: Partial<RoomOptions>){
     this.game = new Game();
-    this.setState(this.game.world);
     this.game.world.init();
+    this.setState(this.game.world);
     const seekingId = options.roomId?.toLowerCase()
     if (seekingId && !isIdFree(seekingId)) {
         this.roomId = seekingId

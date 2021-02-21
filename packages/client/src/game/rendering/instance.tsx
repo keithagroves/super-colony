@@ -6,10 +6,11 @@ import { Types } from '@adventurers/common';
 import { Rectangle } from "./components";
 import { Ant } from "./entities/ant";
 import { Simple } from "pixi-cull";
+import { PlayerViewManager } from "game/state/managers/PlayerViewManager";
 
 interface IProps {
   viewport: Viewport,
-  me: Types.Player,
+  me: PlayerViewManager,
   cull: Simple
 }
 interface Xy {
@@ -32,7 +33,7 @@ export const GameInstance = (props: IProps) => {
   for (let i = 0; i < testAnts.length; i++) {
     let ant = testAnts[i];
     if (ant.x < bounds.width + bounds.x && ant.x > bounds.x && ant.y < bounds.height + bounds.y && ant.y > bounds.y) {
-      players.push(<Ant playerId={"abc"+i} key={"abc"+i} dist={me.distance} x={ant.x} y={ant.y} scale={1} />);
+      players.push(<Ant playerId={"abc"+i} key={"abc"+i} dist={10} x={ant.x} y={ant.y} scale={1} />);
     } else {
       antsNotDrawn++;
     }
@@ -43,7 +44,7 @@ export const GameInstance = (props: IProps) => {
     <>
       <Container sortableChildren={true}>
         {players}
-        <Ant playerId={"abc"} key={"aasdf"} dist={me.distance} x={me.x} y={me.y} scale={1} />
+        <Ant playerId={"abc"} key={"aasdf"} dist={19} x={me.x} y={me.y} scale={1} />
         <Rectangle x={100} y={100} width={50} height={100} fill={255} fillAlpha={1} outline={10}></Rectangle>
       </Container>
     </>

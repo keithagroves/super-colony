@@ -1,11 +1,12 @@
+import { Maths } from "@adventurers/common";
 import { IInputs } from "@adventurers/common/build/types";
-import { Z_BEST_SPEED } from "zlib";
+
 
 export class PlayerViewManager{
     x: number;
     y: number;
-    scrollSpeed: number = 3;
-    inputState: IInputs = {
+    scrollSpeed: number = 5;
+    inputState:IInputs = {
     left: false,
     up: false,
     right: false,
@@ -19,22 +20,21 @@ export class PlayerViewManager{
     }
 
     inputs(inputState: IInputs){
-        //Object.apply(inputState, this.inputState);
         Object.assign(this.inputState,inputState);
-        console.log(inputState);
     }
 
     tick(t: number){
         let dx = (t-this.lastUpdate)/50;
         this.lastUpdate = t;
+        
         if(this.inputState.up)
-            this.y-=this.scrollSpeed/dx;
+            this.y = Maths.lerp(this.y,this.y-this.scrollSpeed, dx);
         if(this.inputState.down)
-            this.y+=this.scrollSpeed/dx;
+            this.y = Maths.lerp(this.y, this.y+this.scrollSpeed, dx);
         if(this.inputState.left)
-            this.x-=this.scrollSpeed/dx;
+            this.x = Maths.lerp(this.x, this.x-this.scrollSpeed, dx);
         if(this.inputState.right)
-            this.x+=this.scrollSpeed/dx;
+            this.x = Maths.lerp(this.x, this.x+this.scrollSpeed, dx);
         
     }
 

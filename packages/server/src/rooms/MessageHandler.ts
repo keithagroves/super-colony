@@ -14,7 +14,6 @@ export class MessageHandler{
        this.room.onMessage("trail", this.createTrail); 
     }
     inputMessage(){
-
     }
 
     createTrail(){

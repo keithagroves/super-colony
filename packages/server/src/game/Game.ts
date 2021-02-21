@@ -7,8 +7,8 @@ export class Game{
     }
     tick(timestamp: number){
         let dx = (Date.now()-timestamp)/50.0;
-       
     }
+    
     createTrail(){
         
     }

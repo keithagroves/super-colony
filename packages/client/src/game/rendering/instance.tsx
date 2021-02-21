@@ -12,7 +12,6 @@ interface IProps {
   viewport: Viewport,
   me: PlayerViewManager,
   blockRects: JSX.Element[],
-  cull: Simple
 }
 interface Xy {
   x: number,
@@ -20,7 +19,6 @@ interface Xy {
 }
 let testAnts: Xy[] = [];
 export const GameInstance = (props: IProps) => {
-  const state = props;
   if (testAnts.length < 1) {
     for (let i = 0; i < 1000; i++) {
       testAnts.push({ x: Math.random() * 2000 - 100, y: Math.random() * 2000 - 100 })
@@ -29,14 +27,11 @@ export const GameInstance = (props: IProps) => {
   }
   const players = [];
   let me = props.me;
-  let antsNotDrawn = 0;
   let bounds = props.viewport.getVisibleBounds();
   for (let i = 0; i < testAnts.length; i++) {
     let ant = testAnts[i];
     if (ant.x < bounds.width + bounds.x && ant.x > bounds.x && ant.y < bounds.height + bounds.y && ant.y > bounds.y) {
       players.push(<Ant playerId={"abc"+i} key={"abc"+i} dist={10} x={ant.x} y={ant.y} scale={1} />);
-    } else {
-      antsNotDrawn++;
     }
   }
 
@@ -44,8 +39,8 @@ export const GameInstance = (props: IProps) => {
   return (
     <>
       <Container sortableChildren={true}>
-        {players}
         {props.blockRects}
+        {players}
         <Ant playerId={"abc"} key={"aasdf"} dist={19} x={me.x} y={me.y} scale={1} />
         <Rectangle x={100} y={100} width={50} height={100} fill={255} fillAlpha={1} outline={10}></Rectangle>
       </Container>

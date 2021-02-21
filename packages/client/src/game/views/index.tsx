@@ -8,7 +8,6 @@ import { GameInstance } from "../rendering/instance"
 import { Controls } from "game/controls";
 import { Types } from "@adventurers/common";
 import { Simple } from "pixi-cull";
-import { Rectangle } from "game/rendering/components/Rectangle";
 import { Block } from "game/rendering/entities/block";
 
 interface PlayViewProps {
@@ -128,9 +127,8 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
       <GameInstance
         key="game-instance"
         viewport={this.viewport}
-        me={me}
         blockRects={blocksRects}
-        cull={this.cull}
+        me={me}
       />
       , this.culledViewport());
 

@@ -1,4 +1,3 @@
-import { Ellipse } from '../../components/Ellipse';
 import React from 'react';
 import { Rectangle } from 'game/rendering/components';
 

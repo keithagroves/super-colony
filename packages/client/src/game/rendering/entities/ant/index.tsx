@@ -1,4 +1,3 @@
-import { Ellipse } from '../../components/Ellipse';
 import React, { useMemo } from 'react';
 import { Head } from './head';
 import { Abdomen } from './abdomen';

@@ -96,8 +96,8 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
 
     const width = this.app.view.width;
     const height = this.app.view.height;
-    const me = stateManager.me;
-
+    const me = stateManager.playerView;
+    
     if (me !== null) {
       this.viewport.x = -me.x * scale + width / 2;
       this.viewport.y = -me.y * scale + height / 2;
@@ -131,7 +131,9 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
   }
   actionCallback(inputs: Types.IInputs) {
     console.log("actioncallback");
-    this.props.stateManager.room?.send("input", inputs);
+    this.props.stateManager.playerView.inputs(inputs);
+//   this.props.stateManager.room?.send("input", inputs);
+  //  }
   }
   mouseMoveCallback() {
     console.log("mouseMoveCallback")

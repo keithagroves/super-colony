@@ -1,6 +1,7 @@
 import {Room} from 'colyseus.js';
 import {ColyseusService} from 'services/colyseus';
 import {Types} from '@adventurers/common';
+import { PlayerViewManager } from './managers/PlayerViewManager';
 
 export class StateManager{
 
@@ -10,10 +11,10 @@ export class StateManager{
     firstState: boolean = false;
     me:Types.Player = {x:100,y:100, distance:0}
     serverLatencyOffset: number = 50;
+    playerView: PlayerViewManager = new PlayerViewManager(0,0);
     async create(colyseus: ColyseusService, lobby: string): Promise<StateManager> {
         const result = new StateManager(colyseus, lobby);
-        await result.setup();
-        return result;
+        await result.setup(); return result;
       }
 
     async setup() {
@@ -24,7 +25,6 @@ export class StateManager{
           
           timestamp: (v) => {
             this.serverLatencyOffset = v - Date.now();
-            //console.log(v);
           },
           player: (v) => (this.me = v),
         
@@ -42,9 +42,10 @@ export class StateManager{
       constructor(readonly colyseus: ColyseusService, readonly lobby:string){
 
       }
+
       tick(){
-       
           this.firstState = true;
             const t = Date.now();
+          this.playerView.tick(t);
       }
 } 

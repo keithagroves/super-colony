@@ -1,6 +1,4 @@
-import React, { useEffect, useCallback, useMemo } from "react";
-import { throttleTime } from "rxjs/operators";
-import {isMobile} from 'util/mobile';
+import React, { useCallback, useMemo } from "react";
 import {DesktopControls} from './desktop';
 import {Types} from '@adventurers/common'
 import { IInputs } from "@adventurers/common/build/types";
@@ -63,12 +61,12 @@ export const Controls = (props: ControlProps) => {
         }
       }
       const updated = Object.assign({}, activeControls, changeClone);
+      console.log("updated"+JSON.stringify(updated));
       actionCallback(updated);
       activeControls = updated;
     },
     [actionCallback]
   );
-
 
 
 

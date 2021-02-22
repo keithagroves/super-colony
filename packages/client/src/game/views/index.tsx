@@ -100,7 +100,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     const blocks = this.props.stateManager.room.state.blocks;
     if(blocks){
       blocks.forEach((value: any, key: string)=>{
-        blocksRects.push(<Block key={key} x={value.x} y={value.y} width={100} height = {100}   />)
+        blocksRects.push(<Block key={key} x={value.x} y={value.y} width={30} height = {30}   />)
   }
       );
   }

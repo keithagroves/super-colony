@@ -61,7 +61,6 @@ export const Controls = (props: ControlProps) => {
         }
       }
       const updated = Object.assign({}, activeControls, changeClone);
-      console.log("updated"+JSON.stringify(updated));
       actionCallback(updated);
       activeControls = updated;
     },

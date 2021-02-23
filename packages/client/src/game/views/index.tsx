@@ -7,7 +7,7 @@ import { render } from "react-pixi-fiber";
 import { GameInstance } from "../rendering/instance"
 import { Controls } from "game/controls";
 import { Types } from "@adventurers/common";
-import { Simple } from "pixi-cull";
+import { SpatialHash } from "pixi-cull";
 import { Block } from "game/rendering/entities/block";
 
 interface PlayViewProps {
@@ -41,7 +41,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
   app!: PIXI.Application;
   gameCanvas!: HTMLDivElement;
   viewport!: Viewport;
-  cull!: Simple;
+  cull!: SpatialHash;
   state: PlayViewState = {
     fps: 60,
     ping: 50,
@@ -63,10 +63,9 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     });
     this.gameCanvas!.appendChild(this.app.view);
     this.viewport = new Viewport();
-    this.cull = new Simple();
+    this.cull = new SpatialHash();
     this.viewport.scale = new PIXI.Point(scale, scale);
     this.app.stage.addChild(this.viewport);
-    this.cull.addList(this.viewport.children);
     this.app.start();
     this.raf = requestAnimationFrame(this.tick);
   }
@@ -106,7 +105,6 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
   }
   }
   
-  console.log(blocksRects.length);
     const width = this.app.view.width;
     const height = this.app.view.height;
     const me = stateManager.playerView;
@@ -136,7 +134,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
 
   culledViewport(): Viewport {
     if (this.viewport.dirty) {
-      this.cull.addList(this.viewport.children);
+      this.cull.addContainer(this.viewport.children[0] as PIXI.Container);
       this.cull.cull(this.viewport.getVisibleBounds());
       this.viewport.dirty = false;
     }

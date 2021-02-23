@@ -20,7 +20,7 @@ interface Xy {
 let testAnts: Xy[] = [];
 export const GameInstance = (props: IProps) => {
   if (testAnts.length < 1) {
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 100; i++) {
       testAnts.push({ x: Math.random() * 2000 - 100, y: Math.random() * 2000 - 100 })
     }
 

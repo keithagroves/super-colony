@@ -7,8 +7,9 @@ export class World extends Schema{
 
 
     init(){
-          for(let i = 0; i < 10; i++){
-               for(let j = 0; j < 10; j++){
+          for(let i = 0; i < 50; i++){
+               for(let j = 0; j < 50; j++){
+                    
                     let block = new Block();
                     block.x = i * 30;
                     block.y = j * 30;

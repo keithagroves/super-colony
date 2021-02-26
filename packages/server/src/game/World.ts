@@ -9,11 +9,11 @@ export class World extends Schema{
     init(){
           for(let i = 0; i < 50; i++){
                for(let j = 0; j < 50; j++){
-                    
+
                     let block = new Block();
                     block.x = i * 30;
                     block.y = j * 30;
-                    block.blocktype = Math.floor(Math.random()*5);
+                   // block.blocktype = Math.floor(Math.random()*5);
                     block.id = nanoid(10);
                     this.blocks.set(block.id, block);
                }     

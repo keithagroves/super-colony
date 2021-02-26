@@ -94,21 +94,21 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     //this.cull.cull(this.viewport)
     this.viewport.scale = new PIXI.Point(scale, scale);
     let blocksRects: any = [];
-    
-    if(this.props.stateManager.room){
-    const blocks = this.props.stateManager.room.state.blocks;
-    if(blocks){
-      blocks.forEach((value: any, key: string)=>{
-        blocksRects.push(<Block key={key} x={value.x} y={value.y} width={30} height = {30}   />)
-  }
-      );
-  }
-  }
-  
+
+    if (this.props.stateManager.room) {
+      const blocks = this.props.stateManager.room.state.blocks;
+      if (blocks) {
+        blocks.forEach((value: any, key: string) => {
+          blocksRects.push(<Block key={key} x={value.x} y={value.y} width={30} height={30} />)
+        }
+        );
+      }
+    }
+
     const width = this.app.view.width;
     const height = this.app.view.height;
     const me = stateManager.playerView;
-    
+
     if (me !== null) {
       this.viewport.x = -me.x * scale + width / 2;
       this.viewport.y = -me.y * scale + height / 2;
@@ -143,8 +143,8 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
   actionCallback(inputs: Types.IInputs) {
     console.log("actioncallback");
     this.props.stateManager.playerView.inputs(inputs);
-//   this.props.stateManager.room?.send("input", inputs);
-  //  }
+    //   this.props.stateManager.room?.send("input", inputs);
+    //  }
   }
   mouseMoveCallback() {
     console.log("mouseMoveCallback")

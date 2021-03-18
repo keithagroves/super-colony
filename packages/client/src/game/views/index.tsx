@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useMemo } from "react";
 import { StateManager } from "game/state";
 import { useDisableScroll, useWindowSize } from "hooks";
 import * as PIXI from "pixi.js";
@@ -8,7 +8,7 @@ import { GameInstance } from "../rendering/instance"
 import { Controls } from "game/controls";
 import { Types } from "@adventurers/common";
 import { SpatialHash } from "pixi-cull";
-import { Block } from "game/rendering/entities/block";
+import { World } from "game/rendering/entities/world";
 
 interface PlayViewProps {
   stateManager: StateManager;
@@ -47,6 +47,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     ping: 50,
     menuShow: false,
   };
+  world:any;
   playerPosition: { x: number, y: number } = { x: 0, y: 0 };
 
   raf?: ReturnType<typeof requestAnimationFrame>;
@@ -93,21 +94,18 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
     //this.cull.addList(this.viewport.children);
     //this.cull.cull(this.viewport)
     this.viewport.scale = new PIXI.Point(scale, scale);
-    let blocksRects: any = [];
 
-    if (this.props.stateManager.room) {
-      const blocks = this.props.stateManager.room.state.blocks;
-      if (blocks) {
-        blocks.forEach((value: any, key: string) => {
-          blocksRects.push(<Block key={key} x={value.x} y={value.y} width={30} height={30} />)
-        }
-        );
-      }
-    }
+   
+  
 
     const width = this.app.view.width;
     const height = this.app.view.height;
     const me = stateManager.playerView;
+    if (this.props.stateManager.room) {
+      this.world = <World stateManager={stateManager} x={me.x} y={me.y}></World>
+         
+      
+    }
 
     if (me !== null) {
       this.viewport.x = -me.x * scale + width / 2;
@@ -125,7 +123,7 @@ export class PlayView extends Component<PlayViewProps, PlayViewState> {
       <GameInstance
         key="game-instance"
         viewport={this.viewport}
-        blockRects={blocksRects}
+        world={this.world}
         me={me}
       />
       , this.culledViewport());

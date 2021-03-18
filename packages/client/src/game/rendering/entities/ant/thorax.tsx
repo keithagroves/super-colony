@@ -14,7 +14,7 @@ const legRadius = 4;
 
 export const Thorax = (props: IProps) => {
     
-    frameCount+=props.dist/2000;
+    frameCount+=props.dist/500;
     let legY = props.y+2;
     let legset2 = frameCount+ Math.PI*0.7;
     let legset3 = frameCount+ Math.PI*1.5;

@@ -7,11 +7,11 @@ import { Rectangle } from "./components/Rectangle";
 import { Ant } from "./entities/ant";
 import { Simple } from "pixi-cull";
 import { PlayerViewManager } from "game/state/managers/PlayerViewManager";
-import {Block} from './entities/block'
+import {World} from './entities/world'
 interface IProps {
   viewport: Viewport,
   me: PlayerViewManager,
-  blockRects: JSX.Element[],
+  world: any,
 }
 interface Xy {
   x: number,
@@ -39,7 +39,7 @@ export const GameInstance = (props: IProps) => {
   return (
     <>
       <Container sortableChildren={true}>
-        {props.blockRects}
+        {props.world}
         {players}
         <Ant playerId={"abc"} key={"aasdf"} dist={19} x={me.x} y={me.y} scale={1} />
         <Rectangle x={100} y={100} width={50} height={100} fill={255} fillAlpha={1} outline={10}></Rectangle>

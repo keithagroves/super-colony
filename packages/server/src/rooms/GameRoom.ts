@@ -25,7 +25,7 @@ export class GameRoom extends Room<World> {
     takeId(this.roomId);
     this.registerMessages();
 
-    setInterval(() => this.messageHandler.broadcastTimestamp(), 1000);
+    setInterval(() => this.messageHandler.broadcastTimestamp(), 1000/50);
     this.startGameLoop();
     }
 
